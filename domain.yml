@@ -82,7 +82,7 @@ slots:
     influence_conversation: false
     type: categorical
     values:
-      - "weather"
+      - weather
     mappings:
       - type: from_entity
         entity: function
@@ -130,11 +130,16 @@ forms:
 
 actions:
   - action_generate_search
+  - validate_feedback_form
   - validate_search_form
   - validate_weather_form
   - action_get_weather
+  - action_send_feedback
 
 responses:
+
+  utter_satisfied:
+    - text: "Are you satisfied with the result? (Type No, if you want to give a feedback.)"
 
   utter_ask_location:
     - text: "In what location?"

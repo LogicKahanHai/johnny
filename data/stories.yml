@@ -16,7 +16,7 @@ stories:
       - action: action_generate_search
 
 
-  - story: Get weather
+  - story: Get weather; not satisfied
     steps:
       - intent: weather
       - action: weather_form
@@ -25,3 +25,34 @@ stories:
           - requested_slot: location
       - active_loop: null
       - action: action_get_weather
+      - action: utter_satisfied
+      - intent: deny
+      - action: feedback_form
+      - active_loop: feedback_form
+      - slot_was_set:
+        - requested_slot: name
+      - slot_was_set:
+        - requested_slot: rating
+      - slot_was_set:
+        - function: weather
+      - slot_was_set:
+        - requested_slot: feedback
+      - active_loop: null
+      - action: action_send_feedback
+      
+  - story: Feedback Form story
+    steps:
+      - action: utter_satisfied
+      - intent: deny
+      - action: feedback_form
+      - active_loop: feedback_form
+      - slot_was_set:
+        - requested_slot: name
+      - slot_was_set:
+        - requested_slot: rating
+      - slot_was_set:
+        - requested_slot: function
+      - slot_was_set:
+        - requested_slot: feedback
+      - active_loop: null
+      - action: action_send_feedback

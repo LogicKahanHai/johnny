@@ -15,7 +15,8 @@ rules:
 
   - rule: Activate Feedback Form
     steps:
-      - intent: feedback
+      - action: utter_satisfied
+      - intent: deny
       - action: feedback_form
       - active_loop: feedback_form
 
@@ -25,7 +26,7 @@ rules:
     steps:
       - action: feedback_form
       - active_loop: null
-      - action: utter_thanks
+      - action: action_send_feedback
 
   - rule: Activate Search Form
     steps:
@@ -54,3 +55,4 @@ rules:
       - action: weather_form
       - active_loop: null
       - action: action_get_weather
+      - action: utter_satisfied
