@@ -1,0 +1,203 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - feedback
+  - search
+  - weather
+
+
+entities:
+  - name
+  - rating
+  - feedback
+  - function
+  - search_engine
+  - query
+  - location
+
+slots:
+  location:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: location
+      - type: from_text
+        conditions:
+          - active_loop: weather_form
+            requested_slot: location
+
+  query:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: query
+      - type: from_text
+        conditions:
+          - active_loop: search_form
+            requested_slot: query
+  search_engine:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: search_engine
+      - type: from_text
+        conditions:
+          - active_loop: search_form
+            requested_slot: search_engine
+  name:
+    influence_conversation: false
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+      - type: from_text
+        conditions:
+          - active_loop: feedback_form
+            requested_slot: name
+  rating:
+    influence_conversation: false
+    type: categorical
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    mappings:
+      - type: from_entity
+        entity: rating
+      - type: from_text
+        conditions:
+          - active_loop: feedback_form
+            requested_slot: rating
+  function:
+    influence_conversation: false
+    type: categorical
+    values:
+      - "weather"
+    mappings:
+      - type: from_entity
+        entity: function
+      - type: from_text
+        conditions:
+          - active_loop: feedback_form
+            requested_slot: function
+  feedback:
+    influence_conversation: false
+    type: text
+    mappings:
+      - type: from_entity
+        entity: feedback
+      - type: from_text
+        conditions:
+          - active_loop: feedback_form
+            requested_slot: feedback
+
+
+forms:
+  weather_form:
+    ignored_intents:
+      - chitchat
+      - bot_challenge
+    required_slots:
+      - location
+
+  feedback_form:
+    ignored_intents:
+      - chitchat
+      - bot_challenge
+    required_slots:
+      - name
+      - rating
+      - function
+      - feedback
+
+  search_form:
+    ignored_intents:
+      - chitchat
+      - bot_challenge
+    required_slots:
+      - search_engine
+      - query
+
+actions:
+  - action_generate_search
+  - validate_search_form
+  - validate_weather_form
+  - action_get_weather
+
+responses:
+
+  utter_ask_location:
+    - text: "In what location?"
+
+  utter_search_engine_not_supported:
+    - text: "Sorry, I don't support that search engine yet. Please try again."
+
+  utter_ask_query:
+    - text: "What would you like to search for?"
+
+  utter_ask_search_engine:
+    - text: "Which search engine would you like to use?"
+      buttons:
+        - title: "Google"
+          payload: '/search_engine{"search_engine": "google"}'
+        - title: "Bing"
+          payload: '/search_engine{"search_engine": "bing"}'
+        - title: "Github"
+          payload: '/search_engine{"search_engine": "github"}'
+        - title: "Youtube"
+          payload: '/search_engine{"search_engine": "youtube"}'
+        - title: "Stackoverflow"
+          payload: '/search_engine{"search_engine": "stackoverflow"}'
+
+  utter_ask_name:
+    - text: "What is your name?"
+    - text: "What should I call you?"
+
+  utter_ask_rating:
+    - text: "How would you rate your experience with me? (1-5)"
+    - text: "How would you rate me on a scale of 1-5?"
+
+  utter_ask_function:
+    - text: "What function were you trying to use?"
+
+  utter_ask_feedback:
+    - text: "What feedback do you have for me?"
+
+  utter_thanks:
+    - text: "Thank you for your feedback!"
+
+  utter_greet:
+    - text: "Hey! How are you?"
+
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

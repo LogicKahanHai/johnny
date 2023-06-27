@@ -1,0 +1,27 @@
+version: "3.1"
+
+stories:
+
+
+  - story: search with query
+    steps:
+      - intent: search
+      - action: search_form
+      - active_loop: search_form
+      - slot_was_set:
+          - requested_slot: search_engine
+      - slot_was_set:
+          - requested_slot: query
+      - active_loop: null
+      - action: action_generate_search
+
+
+  - story: Get weather
+    steps:
+      - intent: weather
+      - action: weather_form
+      - active_loop: weather_form
+      - slot_was_set:
+          - requested_slot: location
+      - active_loop: null
+      - action: action_get_weather

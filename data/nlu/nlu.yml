@@ -1,0 +1,89 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+
+  - intent: goodbye
+    examples: |
+      - cu
+      - good by
+      - cee you later
+      - good night
+      - bye
+      - goodbye
+      - have a nice day
+      - see you around
+      - bye bye
+      - see you later
+
+  - intent: affirm
+    examples: |
+      - yes
+      - y
+      - indeed
+      - of course
+      - that sounds good
+      - correct
+
+  - intent: deny
+    examples: |
+      - no
+      - n
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
+
+
+  - intent: feedback
+    examples: |
+      - [You are very good](feedback)
+      - [You are very bad](feedback)
+      - [You are very nice](feedback)
+      - [You are very rude](feedback)
+      - [You are dumb](feedback)
+      - Do you not understand?
+      - You cant help me
+      - You are not helpful
+      - I would rate you [1](rating)/10
+      - I would rate you [2](rating)/10
+      - I would rate you a [3](rating)
+      - Can i speak to a human?
+      - I want to speak to your developer
+      - I want to speak to your manager
+      - I want to speak to your boss
+      - I want to speak to your supervisor
+      - dumb
+      - Your developer is dumb
+      - Your developer is stupid
+      - your developer did a good job
+      - your developer did a bad job
+      - your developer is nice
+      - feedback
+      - I want to give feedback
+      - I have feedback
+
+
+
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?

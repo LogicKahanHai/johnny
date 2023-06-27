@@ -1,0 +1,4 @@
+.idea/
+.rasa/
+.vscode/
+actions/__pycache__

@@ -1,0 +1,22 @@
+version: "3.1"
+
+nlu:
+  - regex: location
+    examples: |
+      - (?<=in )[\s\S]*[^(?:\?)]
+      - (?<=at )[\s\S]*[^(?:\?)]
+      - (?<=for )[\s\S]*[^(?:\?)]
+
+  - intent: weather
+    examples: |
+      - weather in [London](location)
+      - what is the weather in [Berlin](location)?
+      - tell me the weather in [Rome](location)
+      - how is the weather in [Copenhagen](location) today?
+      - what is the weather like in [Moscow](location)?
+      - what is the weather?
+      - weather
+      - what is it like outside?
+      - what is the temperature in [London](location)?
+      - is it hot in [Paris](location) now?
+      - how is it in [London](location) today?

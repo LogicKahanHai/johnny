@@ -1,0 +1,36 @@
+version: "3.1"
+
+nlu:
+  - lookup: search_engines
+    examples: |
+      - google
+      - youtube
+      - github
+      - stackoverflow
+
+  - regex: query
+    examples: |
+      - (?<=from )([^\n\r]*)
+      - (?<=for )([^\n\r]*)
+      - (?<=on )([^\n\r]*)
+      - (?<=about )([^\n\r]*)
+      - (?<=google )([^\n\r]*)
+      - (?<=youtube )([^\n\r]*)
+      - (?<=github )([^\n\r]*)
+      - (?<=stackoverflow )([^\n\r]*)
+
+  - intent: search
+    examples: |
+      - [google](search_engine) [what is life?](query)
+      - [youtube](search_engine) [how to make a chatbot?](query)
+      - [github](search_engine) [how to make a chatbot?](query)
+      - [stackoverflow](search_engine) [how to make a chatbot?](query)
+      - Hey, can you [google](search_engine) [how to make maggi](query)
+      - Hey, can you search [youtube](search_engine) [how to make maggi](query)
+      - Show me results from [github](search_engine) for [react examples](query)
+      - Show me results from [stackoverflow](search_engine) [how to center a div](query)
+      - Can you search [google](search_engine) [how to make maggi](query)
+      - Show me a video from [youtube](search_engine) on [how to make maggi](query)
+      - Hey [google](search_engine) [how to make maggi](query)
+      - Hey [youtube](search_engine) [how to make maggi](query)
+      - give me a video from [youtube](search_engine) on [how to make maggi](query)

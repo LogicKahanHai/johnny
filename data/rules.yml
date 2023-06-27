@@ -1,0 +1,56 @@
+version: "3.1"
+
+rules:
+
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Say 'I am a bot' anytime the user challenges
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+
+  - rule: Activate Feedback Form
+    steps:
+      - intent: feedback
+      - action: feedback_form
+      - active_loop: feedback_form
+
+  - rule: Deactivate Feedback Form
+    condition:
+      - active_loop: feedback_form
+    steps:
+      - action: feedback_form
+      - active_loop: null
+      - action: utter_thanks
+
+  - rule: Activate Search Form
+    steps:
+      - intent: search
+      - action: search_form
+      - active_loop: search_form
+
+  - rule: Deactivate Search Form
+    condition:
+      - active_loop: search_form
+    steps:
+      - action: search_form
+      - active_loop: null
+      - action: action_generate_search
+
+  - rule: Activate Weather Form
+    steps:
+      - intent: weather
+      - action: weather_form
+      - active_loop: weather_form
+
+  - rule: Deactivate Weather Form
+    condition:
+      - active_loop: weather_form
+    steps:
+      - action: weather_form
+      - active_loop: null
+      - action: action_get_weather
