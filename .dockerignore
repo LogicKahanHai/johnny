@@ -1,0 +1,7 @@
+models/*
+actions/*
+tests/*
+.idea/
+.rasa/
+.vscode/
+.env
